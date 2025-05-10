@@ -6,5 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface LotionProductRepository extends JpaRepository<LotionProduct, Long> {
-    List<LotionProduct> findBySkinType(String skinType);
+    List<LotionProduct> findBySkinTypeContaining(String skinType);
 }

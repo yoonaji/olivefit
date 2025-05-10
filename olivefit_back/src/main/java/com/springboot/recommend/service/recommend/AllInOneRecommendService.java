@@ -21,8 +21,9 @@ public class AllInOneRecommendService {
 
     public List<ProductResponseDTO> recommendForUser(Long userId) {
         String skinType = surveyRepository.findSkinTypeByUserId(userId);
+        System.out.println("사용자 skinType: " + skinType);
 
-        return allInOneProductRepository.findBySkinType(skinType).stream()
+        return allInOneProductRepository.findBySkinTypeContaining(skinType).stream()
                 .map(p -> new ProductResponseDTO(
                         p.getId(), p.getBrand(), p.getName(), p.getLink(),
                         p.getPrice(), p.getImage(), p.getSkinType(),

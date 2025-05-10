@@ -1,15 +1,22 @@
 version: "3.8"
 services:
-  db:
-    image: postgres:latest
-    container_name: survey-db
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: olivefit_app
     ports:
-      - "5454:5432"           # 바뀐 포트
+      - "8080:8080"
+
     environment:
-      POSTGRES_DB: survey     # 바뀐 DB 이름
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: 0000
-    volumes:
-      - surveydata:/var/lib/postgresql/data
-volumes:
-  surveydata:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://my-postgres:5432/cosmetics
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=0000
+    networks:
+      - olivefit-net
+
+networks:
+  olivefit-net:
+    external: true
+

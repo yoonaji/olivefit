@@ -22,7 +22,7 @@ public class SkinRecommendService {
     public List<ProductResponseDTO> recommendForUser(Long userId) {
         String skinType = surveyRepository.findSkinTypeByUserId(userId);
 
-        return skinProductRepository.findBySkinType(skinType).stream()
+        return skinProductRepository.findBySkinTypeContaining(skinType).stream()
                 .map(p -> new ProductResponseDTO(
                         p.getId(), p.getBrand(), p.getName(), p.getLink(),
                         p.getPrice(), p.getImage(), p.getSkinType(),
