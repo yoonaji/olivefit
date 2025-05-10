@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  db:
+    image: postgres:latest
+    container_name: survey-db
+    ports:
+      - "5454:5432"           # 바뀐 포트
+    environment:
+      POSTGRES_DB: survey     # 바뀐 DB 이름
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 0000
+    volumes:
+      - surveydata:/var/lib/postgresql/data
+volumes:
+  surveydata:
