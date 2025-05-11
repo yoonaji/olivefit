@@ -26,7 +26,7 @@ public class SurveyService {
 
         // DB 저장
         UserSkinInfo info = new UserSkinInfo();
-        info.setUserId(dto.getUserId());
+        info.setUserId(dto.getUserId()); //dto.getUserId()
         info.setSkinType(skinType);
         info.setSkinConcerns(dto.getSkinConcerns());
         info.setSensitivityLevel(dto.getSensitivityLevel());
