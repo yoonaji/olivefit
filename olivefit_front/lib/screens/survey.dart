@@ -12,7 +12,7 @@ class Survey extends StatefulWidget {
 
 class _SurveyState extends State<Survey> {
 
-   final int _userId = 7; // ✅ 하드코딩된 더미 유저 ID
+   final int _userId = 8; // ✅ 하드코딩된 더미 유저 ID
 
   String? _q1Answer;
   String? _q2Answer;
