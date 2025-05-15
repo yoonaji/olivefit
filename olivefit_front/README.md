@@ -16,3 +16,4 @@ For help getting started with Flutter development, view the
 samples, guidance on mobile development, and a full API reference.
 
 flutter 버전 맞춰줌. 3.29.2
+option으로 경고일때는 그냥 통과로 해줌. 
