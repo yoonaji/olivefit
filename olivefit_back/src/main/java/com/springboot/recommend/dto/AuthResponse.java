@@ -1,4 +1,4 @@
 package com.springboot.recommend.dto;
 
-public class AuthResponseDto {
+public class AuthResponse {
 }

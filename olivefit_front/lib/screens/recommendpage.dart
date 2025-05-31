@@ -4,8 +4,15 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ProductPage extends StatefulWidget {
-  //final String userId;
-  const ProductPage({super.key});  //, required this.userId
+  final int userId;
+  final String token;
+
+   const ProductPage({
+    super.key,
+    required this.userId,
+    required this.token,
+  });
+  //, required this.userId
 
   @override
   State<ProductPage> createState() => _ProductPageState();
@@ -25,17 +32,21 @@ class _ProductPageState extends State<ProductPage> {
 
   final dummyUserId = 8;
   Future<void> fetchProducts() async {
-    final response = await http.get(Uri.parse(
-        'http://192.168.0.22:8080/api/recommend/${selectedCategory.toLowerCase()}/$dummyUserId'));
+    final response = await http.get(
+    Uri.parse('http://192.168.0.22:8080/api/recommend/${selectedCategory.toLowerCase()}/${widget.userId}'),
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ${widget.token}',
+    },
+  );
 
-    if (response.statusCode == 200) {
-      setState(() {
-        products = json.decode(utf8.decode(response.bodyBytes));
-      });
-    } else {
-      // error handling
-      debugPrint("Error fetching data");
-    }
+  if (response.statusCode == 200) {
+    setState(() {
+      products = json.decode(utf8.decode(response.bodyBytes));
+    });
+  } else {
+    debugPrint("Error fetching data: ${response.statusCode}");
+  }
   }
 
   void _changeCategory(String category) {

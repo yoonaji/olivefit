@@ -12,9 +12,14 @@ spring:
 
   jpa: #db? ??? ???? ??? ?? ?? ?????
     hibernate: #JPA? ???? ???
-      ddl-auto: update #hibernate? db? ??? ???? ??.
+      ddl-auto: update #이걸 설정하면 테이블이 없을 때자동으로 테이블이 생성된다.
     show-sql: true
     database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
 
   http:
     encoding:
@@ -22,3 +27,7 @@ spring:
       enabled: true
       force: true
 
+bezkoder:
+  app:
+    jwtSecret: VjIzNFRuQWx6UkdyUGJhblBtT3Z1a2Rtd1dEZ3NURzNWVnlZMEtHZG9KZA==
+    jwtExpirationMs: 86400000

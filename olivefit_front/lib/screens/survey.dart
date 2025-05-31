@@ -4,7 +4,16 @@ import 'dart:convert';
 import 'recommendpage.dart'; // 추천 결과 페이지
 
 class Survey extends StatefulWidget {
-  const Survey({super.key});
+  final String token;
+  final String username;
+  final int userId;
+
+  const Survey({
+    super.key,
+    required this.token,
+    required this.username,
+    required this.userId,
+  });
 
   @override
   State<Survey> createState() => _SurveyState();
@@ -12,7 +21,7 @@ class Survey extends StatefulWidget {
 
 class _SurveyState extends State<Survey> {
 
-   final int _userId = 8; // ✅ 하드코딩된 더미 유저 ID
+   
 
   String? _q1Answer;
   String? _q2Answer;
@@ -26,9 +35,12 @@ class _SurveyState extends State<Survey> {
     final url = Uri.parse('http://192.168.0.22:8080/api/survey');
     final response = await http.post(
       url,
-      headers: {'Content-Type': 'application/json'},
+      headers: {'Content-Type': 'application/json',
+        'Authorization': 'Bearer ${widget.token}' // 토큰 추가
+      },
       body: jsonEncode({
-        "userId": _userId,
+        "userId": widget.userId, // userId 추가
+        "username": widget.username, // username 추가
         "skinTypeAnswers": [
           _q1Answer ?? '',
           _q2Answer ?? '',
@@ -43,10 +55,15 @@ class _SurveyState extends State<Survey> {
 
     if (response.statusCode == 200) {
       print('제출 성공: ${response.body}');
+      print('보내는 토큰: ${widget.token}');
+
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => const ProductPage(), // userId 필요 시 여기 수정
+          builder: (context) => ProductPage(
+            userId: widget.userId,
+            token: widget.token,
+          ), // userId 필요 시 여기 수정
         ),
       );
     } else {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/survey.dart'; // 인트로 페이지
+import 'screens/login.dart'; // 인트로 페이지
 
 void main() {
   runApp(const MyApp());
@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
           titleLarge: TextStyle(color: Colors.black),
         ),
       ),
-      home: const Survey(), // 진짜 첫 화면
+      home: const LoginPage(), // 진짜 첫 화면
     );
   }
 }
