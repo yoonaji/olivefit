@@ -8,4 +8,13 @@ public class BoardResponseDto {
     private String content;
     private String author;
     private LocalDateTime createdAt;
+
+    public BoardResponseDto(Long id, String title, String content, String author, LocalDateTime createdAt) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+        this.author = author;
+        this.createdAt = createdAt;
+    }
+
 }
