@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'board_page.dart'; // 게시판 페이지
+import 'MyPage.dart'; // 마이페이지
 
 class ProductPage extends StatefulWidget {
   final int userId;
   final String token;
+  final String username;
 
    const ProductPage({
     super.key,
     required this.userId,
     required this.token,
+    required this.username,
   });
   //, required this.userId
 
@@ -158,6 +162,31 @@ class _ProductPageState extends State<ProductPage> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 0,
+  onTap: (index) {
+    if (index == 1) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) =>  BoardPage(
+          token: widget.token,
+          userId: widget.userId,
+          username: widget.username,
+        )),
+      );
+    }
+    else if (index == 2) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => MyPage(
+            token: widget.token,
+            username: widget.username,
+            userId: widget.userId
+      ),
+      ),
+      );
+    }
+  },
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.star), label: "추천"),
           BottomNavigationBarItem(icon: Icon(Icons.forum), label: "게시판"),

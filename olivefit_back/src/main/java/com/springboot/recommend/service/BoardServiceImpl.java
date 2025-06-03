@@ -37,4 +37,25 @@ public class BoardServiceImpl implements BoardService {
                         board.getCreatedAt()))
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public void updatePost(Long id, BoardRequestDto requestDto) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 게시글이 존재하지 않습니다. id=" + id));
+
+        board.setTitle(requestDto.getTitle());
+        board.setContent(requestDto.getContent());
+        board.setAuthor(requestDto.getAuthor());
+        // createdAt은 그대로 두는 게 일반적
+        boardRepository.save(board);
+    }
+
+    @Override
+    public void deletePost(Long id) {
+        if (!boardRepository.existsById(id)) {
+            throw new IllegalArgumentException("해당 게시글이 존재하지 않습니다. id=" + id);
+        }
+        boardRepository.deleteById(id);
+    }
+
 }

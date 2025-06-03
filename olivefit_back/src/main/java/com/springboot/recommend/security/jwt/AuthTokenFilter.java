@@ -21,6 +21,7 @@ import org.springframework.util.StringUtils;
 
 import com.springboot.recommend.security.services.UserDetailsServiceImpl;
 
+@Component
 public class AuthTokenFilter extends OncePerRequestFilter {
     @Autowired
     private JwtUtils jwtUtils;

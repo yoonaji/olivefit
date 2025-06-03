@@ -63,6 +63,7 @@ class _SurveyState extends State<Survey> {
           builder: (context) => ProductPage(
             userId: widget.userId,
             token: widget.token,
+            username: widget.username, // username 필요 시 여기 수정
           ), // userId 필요 시 여기 수정
         ),
       );

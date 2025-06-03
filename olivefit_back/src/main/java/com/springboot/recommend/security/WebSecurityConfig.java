@@ -31,10 +31,8 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
     @Autowired
     private AuthEntryPointJwt unauthorizedHandler;
 
-    @Bean
-    public AuthTokenFilter authenticationJwtTokenFilter() {
-        return new AuthTokenFilter();
-    }
+    @Autowired
+    public AuthTokenFilter authTokenFilter;
 
 //  @Override
 //  public void configure(AuthenticationManagerBuilder authenticationManagerBuilder) throws Exception {
@@ -80,7 +78,7 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
 
         http.authenticationProvider(authenticationProvider());
 
-        http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterBefore(authTokenFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

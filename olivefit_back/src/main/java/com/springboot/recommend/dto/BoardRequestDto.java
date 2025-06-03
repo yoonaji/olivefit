@@ -1,8 +1,12 @@
 package com.springboot.recommend.dto;
 
-import lombok.Getter;
+import lombok.*;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
+@Setter
 public class BoardRequestDto {
     private String title;
     private String content;
