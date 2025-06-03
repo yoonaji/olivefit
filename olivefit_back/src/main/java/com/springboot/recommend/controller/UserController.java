@@ -54,5 +54,13 @@ public class UserController {
         return ResponseEntity.ok(postDtos);
     }
 
+    @GetMapping("/has-survey")
+    public ResponseEntity<Boolean> hasSurvey(@AuthenticationPrincipal UserDetailsImpl userDetails) {
+        Long userId = userDetails.getId();
+        boolean exists = surveyRepository.findByUserId(userId).isPresent();
+        return ResponseEntity.ok(exists);
+    }
+
+
 
 }

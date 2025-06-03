@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Setter
@@ -22,10 +23,13 @@ public class SurveyService {
 
     public void analyzeAndSave(SurveyRequestDTO dto) {
         // 1~5번 응답으로 피부타입 결정
+        UserSkinInfo info = repository.findByUserId(dto.getUserId())
+                .orElse(new UserSkinInfo()); // 없으면 새로 생성
+
         String skinType = determineSkinType(dto.getSkinTypeAnswers());
 
         // DB 저장
-        UserSkinInfo info = new UserSkinInfo();
+
         info.setUserId(dto.getUserId()); //dto.getUserId()
         info.setSkinType(skinType);
         info.setSkinConcerns(dto.getSkinConcerns());
@@ -51,4 +55,21 @@ public class SurveyService {
                 })
                 .orElse("알 수 없음");
     }
+
+    public void updateSurvey(SurveyRequestDTO dto) {
+        Optional<UserSkinInfo> optional = repository.findByUserId(dto.getUserId());
+
+            UserSkinInfo info = optional.get();
+            String skinType = determineSkinType(dto.getSkinTypeAnswers());
+
+            info.setSkinType(skinType);
+            info.setSkinConcerns(dto.getSkinConcerns());
+            info.setSensitivityLevel(dto.getSensitivityLevel());
+
+            repository.save(info);
+
+    }
+
+
+
 }

@@ -20,6 +20,12 @@ public class SurveyController {
         surveyService.analyzeAndSave(dto);
         return ResponseEntity.ok("피부 정보가 저장되었습니다.");
     }
+
+    @PutMapping
+    public ResponseEntity<String> updateSurvey(@RequestBody SurveyRequestDTO dto) {
+        surveyService.analyzeAndSave(dto);
+        return ResponseEntity.ok("피부 정보가 업데이트되었습니다.");
+    }
 }
 
 

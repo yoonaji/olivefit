@@ -7,12 +7,14 @@ class Survey extends StatefulWidget {
   final String token;
   final String username;
   final int userId;
+  final String endpoint; // API 엔드포인트
 
   const Survey({
     super.key,
     required this.token,
     required this.username,
     required this.userId,
+    this.endpoint = '', // 기본 엔드포인트 설정
   });
 
   @override

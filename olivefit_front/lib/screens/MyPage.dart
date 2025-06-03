@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'MyPostPage.dart'; // 게시글 관리 페이지
 import 'board_page.dart'; // 게시판 페이지
+import 'recommendpage.dart'; // 추천 페이지
+import 'survey.dart'; // 설문 페이지
 
 class MyPage extends StatefulWidget {
   final String token;
@@ -133,32 +135,40 @@ class _MyPageState extends State<MyPage> {
                   
                   // 추후 추가될 기능들을 위한 예시 메뉴들
                   Card(
-                    child: ListTile(
-                      leading: const Icon(Icons.settings),
-                      title: const Text("설정"),
-                      subtitle: const Text("앱 설정을 변경할 수 있습니다"),
-                      trailing: const Icon(Icons.arrow_forward_ios),
-                      onTap: () {
-                        // TODO: 설정 페이지로 이동
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("설정 기능은 준비 중입니다")),
-                        );
-                      },
-                    ),
-                  ),
+  child: ListTile(
+    leading: const Icon(Icons.refresh), // 아이콘 변경
+    title: const Text("설문 다시하기"), // 타이틀 변경
+    subtitle: const Text("피부 진단을 다시 진행합니다"), // 설명 변경
+    trailing: const Icon(Icons.arrow_forward_ios),
+    onTap: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Survey(
+            token: widget.token,
+            username: widget.username,
+            userId: widget.userId,
+            endpoint: "update"
+          ),
+        ),
+      );
+    },
+  ),
+),
+
                   
                   const SizedBox(height: 8),
                   
                   Card(
                     child: ListTile(
-                      leading: const Icon(Icons.help),
-                      title: const Text("도움말"),
-                      subtitle: const Text("앱 사용법을 확인할 수 있습니다"),
+                      leading: const Icon(Icons.favorite),
+                      title: const Text("my pick"),
+                      subtitle: const Text("찜한 제품을 확인합니다"),
                       trailing: const Icon(Icons.arrow_forward_ios),
                       onTap: () {
                         // TODO: 도움말 페이지로 이동
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text("도움말 기능은 준비 중입니다")),
+                          const SnackBar(content: Text("찜찜 기능은 준비 중입니다")),
                         );
                       },
                     ),
@@ -170,9 +180,19 @@ class _MyPageState extends State<MyPage> {
         currentIndex: 2, // 마이페이지가 선택된 상태
         onTap: (index) {
           if (index == 0) {
-            // 추천 페이지로 이동 (기존 ProductPage)
-            Navigator.pop(context);
-          } else if (index == 1) {
+            // 추천 페이지로 이동
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ProductPage(
+                  token: widget.token,
+                  userId: widget.userId,
+                  username: widget.username,
+                ),
+              ),
+            ); 
+            }
+          else if (index == 1) {
             // 게시판 페이지로 이동
             Navigator.pushReplacement(
               context,

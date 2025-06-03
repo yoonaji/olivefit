@@ -87,6 +87,7 @@ class _MyPostsPageState extends State<MyPostsPage> {
                 body: jsonEncode({
                   'title': _titleController.text,
                   'content': _contentController.text,
+                  'author': widget.username,
                 }),
               );
 
@@ -143,16 +144,7 @@ class _MyPostsPageState extends State<MyPostsPage> {
                 );
               },
             ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 1,
-        onTap: (index) {
-          // 원하는 페이지로 이동하게 구현
-        },
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: '홈'),
-          BottomNavigationBarItem(icon: Icon(Icons.person), label: '마이페이지'),
-        ],
-      ),
+      
     );
   }
 }
