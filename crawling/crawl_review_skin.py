@@ -5,12 +5,12 @@ import time
 
 # PostgreSQL 연결
 conn = psycopg2.connect(
-    host="localhost",
-    port=5432,
-    dbname="cosmetics",
-    user="postgres",
-    password="0000"
-)
+        host="35.193.145.208",       # Docker 쓰면 "localhost" 또는 "127.0.0.1"
+        port=5432,
+        dbname="olivefit_db",     # 위에서 생성한 DB 이름
+        user="postgres",        # 기본 사용자
+        password="0000"         # 설정한 비밀번호
+    )
 cur = conn.cursor()
 
 # 가장 비율이 높은 항목 텍스트 추출 함수
@@ -110,7 +110,9 @@ def crawl_detail_with_playwright(playwright_page, link):
 # 크롤링 및 DB 업데이트 실행
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=False)
-    page = browser.new_page()
+    
+    context = browser.new_context()
+    page = context.new_page()
 
     cur.execute("SELECT id, product_link FROM skin_products")
     products = cur.fetchall()

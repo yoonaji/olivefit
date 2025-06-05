@@ -37,7 +37,7 @@ class _ProductPageState extends State<ProductPage> {
   final dummyUserId = 8;
   Future<void> fetchProducts() async {
     final response = await http.get(
-    Uri.parse('http://192.168.0.22:8080/api/recommend/${selectedCategory.toLowerCase()}/${widget.userId}'),
+    Uri.parse('https://olivefit-back-649511210818.us-central1.run.app/api/recommend/${selectedCategory.toLowerCase()}/${widget.userId}'),
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ${widget.token}',

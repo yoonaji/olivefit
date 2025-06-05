@@ -10,7 +10,7 @@ services:
       - "8080:8080"
 
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://my-postgres:5432/cosmetics
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://35.193.145.208:5432/olivefit_db
       - SPRING_DATASOURCE_USERNAME=postgres
       - SPRING_DATASOURCE_PASSWORD=0000
     networks:

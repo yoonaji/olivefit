@@ -19,7 +19,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> _login() async {
     final response = await http.post(
-      Uri.parse('http://192.168.0.22:8080/api/auth/signin'),
+      Uri.parse('https://olivefit-back-649511210818.us-central1.run.app/api/auth/signin'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'username': _idController.text,
@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
   // 🔄 추가: 설문 존재 여부 확인 후 분기
   Future<void> _checkSurveyStatus(String token, String username, int userId) async {
     final response = await http.get(
-      Uri.parse('http://192.168.0.22:8080/api/user/has-survey'),
+      Uri.parse('https://olivefit-back-649511210818.us-central1.run.app/api/user/has-survey'),
       headers: {'Authorization': 'Bearer $token'},
     );
 

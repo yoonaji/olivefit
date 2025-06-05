@@ -23,7 +23,7 @@ class _MyPostsPageState extends State<MyPostsPage> {
 
   Future<void> fetchMyPosts() async {
     final response = await http.get(
-      Uri.parse('http://192.168.0.22:8080/api/user/mine'),
+      Uri.parse('https://olivefit-back-649511210818.us-central1.run.app/api/user/mine'),
       headers: {
         'Authorization': 'Bearer ${widget.token}',
       },
@@ -40,7 +40,7 @@ class _MyPostsPageState extends State<MyPostsPage> {
 
   Future<void> deletePost(int postId) async {
     final response = await http.delete(
-      Uri.parse('http://192.168.0.22:8080/api/board/$postId'),
+      Uri.parse('https://olivefit-back-649511210818.us-central1.run.app/api/board/$postId'),
       headers: {
         'Authorization': 'Bearer ${widget.token}',
       },
@@ -79,7 +79,7 @@ class _MyPostsPageState extends State<MyPostsPage> {
           ElevatedButton(
             onPressed: () async {
               final response = await http.put(
-                Uri.parse('http://192.168.0.22:8080/api/board/${post['id']}'),
+                Uri.parse('https://olivefit-back-649511210818.us-central1.run.app/api/board/${post['id']}'),
                 headers: {
                   'Authorization': 'Bearer ${widget.token}',
                   'Content-Type': 'application/json',

@@ -35,7 +35,7 @@ class _MyPageState extends State<MyPage> {
   Future<void> fetchUserInfo() async {
     try {
       final response = await http.get(
-        Uri.parse('http://192.168.0.22:8080/api/user/mypage'),
+        Uri.parse('https://olivefit-back-649511210818.us-central1.run.app/api/user/mypage'),
         headers: {
           'Authorization': 'Bearer ${widget.token}',
           'Content-Type': 'application/json',

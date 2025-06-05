@@ -16,7 +16,7 @@ class _SignupPageState extends State<SignupPage> {
 
   Future<void> _signup() async {
     final response = await http.post(
-      Uri.parse('http://192.168.0.22:8080/api/auth/signup'),
+      Uri.parse('https://olivefit-back-649511210818.us-central1.run.app/api/auth/signup'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode({
         'username': _usernameController.text,

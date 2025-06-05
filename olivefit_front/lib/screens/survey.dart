@@ -34,7 +34,7 @@ class _SurveyState extends State<Survey> {
   String? _q7Answer;
 
   Future<void> _submitSurvey() async {
-    final url = Uri.parse('http://192.168.0.22:8080/api/survey');
+    final url = Uri.parse('https://olivefit-back-649511210818.us-central1.run.app/api/survey');
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json',

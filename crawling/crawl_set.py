@@ -29,9 +29,9 @@ def parse_skin_list(html):
 # PostgreSQL에 저장
 def write_data_to_db(data):
     conn = psycopg2.connect(
-        host="localhost",       # Docker 쓰면 "localhost" 또는 "127.0.0.1"
+        host="35.193.145.208",       # Docker 쓰면 "localhost" 또는 "127.0.0.1"
         port=5432,
-        dbname="cosmetics",     # 위에서 생성한 DB 이름
+        dbname="olivefit_db",     # 위에서 생성한 DB 이름
         user="postgres",        # 기본 사용자
         password="0000"         # 설정한 비밀번호
     )
@@ -49,7 +49,7 @@ def write_data_to_db(data):
 
 # 실행 메인 로직
 if __name__ == "__main__":
-    num_pages = 2
+    num_pages = 10
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=False) #크롬 브라우저 실행. headless=False는 브라우저 창을 보여주는 옵션
         playwright_page = browser.new_page() #새로운 페이지 생성
