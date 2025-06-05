@@ -8,6 +8,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: olivefit
 
     steps:
       - name: Checkout source code
