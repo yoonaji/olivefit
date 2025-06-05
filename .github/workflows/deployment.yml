@@ -1,0 +1,33 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }}
+
+      - name: Set up Google Cloud CLI
+        uses: google-github-actions/setup-gcloud@v1
+
+      - name: Deploy to Cloud Run
+        run: |
+          cd olivefit_back
+          gcloud run deploy ${{ secrets.CLOUD_RUN_SERVICE }} \
+            --source . \
+            --region ${{ secrets.CLOUD_RUN_REGION }} \
+            --allow-unauthenticated \
+            --platform managed \
+            --add-cloudsql-instances=${{ secrets.INSTANCE_CONNECTION_NAME }} \
+            --set-env-vars=DB_USER=${{ secrets.DB_USER }},DB_PASSWORD=${{ secrets.DB_PASSWORD }},DB_NAME=${{ secrets.DB_NAME }},INSTANCE_CONNECTION_NAME=${{ secrets.INSTANCE_CONNECTION_NAME }}
