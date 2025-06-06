@@ -32,3 +32,15 @@ bezkoder:
   app:
     jwtSecret: VjIzNFRuQWx6UkdyUGJhblBtT3Z1a2Rtd1dEZ3NURzNWVnlZMEtHZG9KZA==
     jwtExpirationMs: 86400000
+
+server:
+  tomcat:
+    max-threads: 300  # 최대 스레드 수 (기본 200 → 300으로 늘림)
+    min-spare-threads: 50  # 최소 스레드 수
+
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "metrics", "health", "threadpool"
