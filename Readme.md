@@ -4,16 +4,24 @@
 풀스택 서비스 프로그래밍 - 개인 프로젝트
 
 
-### 📌 프로젝트 개요
+## 📌 프로젝트 개요
 OliveFit은 사용자 피부 타입 설문 결과에 기반해 올리브영 웹사이트에서 크롤링한 제품/리뷰 데이터를 분석하여 맞춤형 화장품 추천을 제공하는 서비스입니다.
 
-설문 기반 피부타입 진단 → 추천 알고리즘 → 사용자 맞춤 추천 제품 제공
+### 주요 기능
 
-추천 대상 제품 및 리뷰는 올리브영 웹사이트에서 크롤링
+- 사용자 설문 기반 피부타입 진단
 
-추천 결과는 웹/모바일 클라이언트(Flutter)에서 확인
+- 맞춤형 화장품 추천
 
-사용자는 회원가입 / 로그인 / 게시판 기능 / 마이페이지 / 추천제품 확인 기능 이용 가능
+- 제품/리뷰 데이터 크롤링 자동화
+
+- 회원가입 / 로그인 (JWT 기반)
+
+- 마이페이지 기능 (피부 재진단, 게시글 관리)
+
+- 게시판 기능 (글 작성 / 수정 / 삭제 / 조회)
+
+- 모바일 클라이언트 앱 제공 (Flutter)
 
 ### 시스템 아키텍쳐
 ![image](https://github.com/user-attachments/assets/8e1338f7-e080-4aa4-b294-79bf15407058)
@@ -36,6 +44,31 @@ REST API 기반 JSON 통신
 ![image](https://github.com/user-attachments/assets/b0564770-a68a-4dcd-aaa8-9357ee916d14)
 ![image](https://github.com/user-attachments/assets/8a8d0a6c-50d0-4781-a0f1-32f14706f31a)
 
+### 🛠️ 기술 스택
+
+- Backend: Spring Boot, Java 17
+  
+- Frontend: Flutter
+  
+- Database: Cloud SQL (PostgreSQL)
+  
+- Web Crawling: Python3, Flask, Playwright
+  
+- Deployment: Docker, GitHub Actions, GCP Cloud Run
+  
+- Authentication: JWT
+
+### 인증 방식
+
+- Backend: JWT 기반 인증 (HTTP Response Body에 Token 반환, Cookie 사용 X)
+  
+    - 로그인 성공 시 서버에서 JWT(Access Token)를 JSON Body로 반환
+      
+- Flutter 클라이언트:
+  
+    - 로그인 후 받은 Access Token을 메모리에 저장 (화면 전환 시 직접 token 넘겨서 사용)
+      
+    - API 호출 시 `Authorization: Bearer <Access Token>` 헤더에 포함해 서버 요청
 
 ### 서비스 상세 흐름
 1️⃣ 사용자 설문 기반 피부 타입 진단
@@ -54,7 +87,7 @@ REST API 기반 JSON 통신
 
 1. 올리브영 카테고리별 제품명, 브랜드명, 상세페이지 url 크롤링
 
-2. 크롤링한 url을 바탕으로 각 제품별 상세 내역 크롤링
+2. 크롤링한 URL 기반으로 제품 상세 정보 및 리뷰 크롤링
 
 제품명,브랜드명,가격, 평점, 리뷰 데이터 , 제품 상세 url , 이미지 url이 포함됨.
 
