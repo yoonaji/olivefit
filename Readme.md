@@ -79,7 +79,6 @@ Cloud Run (GCP)에서 배포
 
 JWT 기반 인증
 
-비밀번호는 BCrypt로 암호화 저장
 
 5️⃣ 마이페이지
 
