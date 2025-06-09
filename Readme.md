@@ -20,13 +20,11 @@ OliveFit은 사용자 피부 타입 설문 결과에 기반해 올리브영 웹�
 
 REST API 기반 JSON 통신
 
-🔹 서버 : Spring Boot 기반 REST API 서버
-
-Cloud Run (GCP)에서 배포
+🔹 서버 : Spring Boot 기반 REST API 서버. Dockerfile로 빌드 후 깃허브 action으로 gcp cloud run에 배포.
 
 🔹 데이터베이스 : Cloud SQL (PostgreSQL)
 
-🔹 크롤링 서버 : flask
+🔹 크롤링 서버 : flask 기반 서버.Dockerfile로 빌드 후 gcp cloud run에 배포. 
 
 백엔드 서버 디렉토리 구조
 
