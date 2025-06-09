@@ -15,18 +15,22 @@ OliveFit은 사용자 피부 타입 설문 결과에 기반해 올리브영 웹�
 
 사용자는 회원가입 / 로그인 / 게시판 기능 / 마이페이지 / 추천제품 확인 기능 이용 가능
 
+### 시스템 아키텍쳐
+![image](https://github.com/user-attachments/assets/8e1338f7-e080-4aa4-b294-79bf15407058)
+
+
 ### 🖥️ 프로젝트 구성
 🔹 클라이언트 :  Flutter 앱
 
 REST API 기반 JSON 통신
 
-🔹 서버 : Spring Boot 기반 REST API 서버. Dockerfile로 빌드 후 깃허브 action으로 gcp cloud run에 배포.
+🔹 백엔드 서버 : Spring Boot 기반 REST API 서버. Dockerfile로 빌드 후 깃허브 action으로 gcp cloud run에 배포.
 
 🔹 데이터베이스 : Cloud SQL (PostgreSQL)
 
-🔹 크롤링 서버 : flask 기반 서버.Dockerfile로 빌드 후 gcp cloud run에 배포. 
+🔹 크롤링 서버 : flask 기반 서버. Dockerfile로 빌드 후 gcp cloud run에 배포. 
 
-백엔드 서버 디렉토리 구조
+### spring 서버 디렉토리 구조
 
 ![image](https://github.com/user-attachments/assets/c0be5d7b-400b-4f51-8f20-931d615b12fa)
 ![image](https://github.com/user-attachments/assets/b0564770-a68a-4dcd-aaa8-9357ee916d14)
@@ -36,38 +40,30 @@ REST API 기반 JSON 통신
 ### 서비스 상세 흐름
 1️⃣ 사용자 설문 기반 피부 타입 진단
 
-최초 로그인 후 설문 화면 제공
+회원가입 후 로그인 -> 설문결과 없으면 설문 진행
 
-총 7문항
+총 7문항으로 구성
 
 피부 타입(건성/지성/복합성/민감성 등) 
 
 피부 고민(트러블/각질/건조 등)
 
-설문 결과 DB 저장
+설문 결과 cloudsql 저장
 
 2️⃣ 제품 데이터 크롤링
 
-올리브영 카테고리별 제품 상세 페이지 크롤링
+1. 올리브영 카테고리별 제품명, 브랜드명, 상세페이지 url 크롤링
 
-제품명
+2. 크롤링한 url을 바탕으로 각 제품별 상세 내역 크롤링
 
-브랜드명
-
-가격
-
-평점
-
-리뷰 데이터 , 제품 상세 url , 이미지 url
+제품명,브랜드명,가격, 평점, 리뷰 데이터 , 제품 상세 url , 이미지 url이 포함됨.
 
 
 3️⃣ 추천 알고리즘
 
 사용자 설문 결과 기반 → 제품을 매칭해 추천
+카테고리별로 제품을 보여줌
 
-추천 API: /api/products/recommend
-
-최대 3개 제품 추천
 
 4️⃣ 회원 관리
 
