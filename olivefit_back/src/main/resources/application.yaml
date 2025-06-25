@@ -43,4 +43,7 @@ management:
   endpoints:
     web:
       exposure:
-        include: "metrics", "health", "threadpool"
+        include:
+          - health
+          - metrics
+          - threadpool
