@@ -2,16 +2,8 @@ from playwright.sync_api import sync_playwright
 from bs4 import BeautifulSoup
 import psycopg2
 import time
+import os
 
-# PostgreSQL 연결
-conn = psycopg2.connect(
-        host="35.193.145.208",       # Docker 쓰면 "localhost" 또는 "127.0.0.1"
-        port=5432,
-        dbname="olivefit_db",     # 위에서 생성한 DB 이름
-        user="postgres",        # 기본 사용자
-        password="0000"         # 설정한 비밀번호
-    )
-cur = conn.cursor()
 
 # 가장 비율이 높은 항목 텍스트 추출 함수
 def get_max_text(items):
@@ -107,6 +99,16 @@ def crawl_detail_with_playwright(playwright_page, link):
         print(f"[오류 발생] {link}\n{e}")
         return None
 def main():
+    
+        # PostgreSQL 연결
+    conn = psycopg2.connect(
+        user=os.environ["DB_USER"],
+        password=os.environ["DB_PASSWORD"],
+        dbname=os.environ["DB_NAME"],
+        host=f'/cloudsql/{os.environ["INSTANCE_CONNECTION_NAME"]}'
+    )
+    cur = conn.cursor()
+
     # 크롤링 및 DB 업데이트 실행
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)

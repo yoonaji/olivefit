@@ -15,8 +15,8 @@ public class CrawlerController {
     private final RestTemplate restTemplate = new RestTemplate();
 
     // Cloud Run 서비스 URL들
-    private static final String PRODUCTS_CRAWLER_URL = "https://products-crawler-649511210818.us-central1.run.app/run-crawler";
-    private static final String REVIEWS_CRAWLER_URL = "https://reviews-crawler-649511210818.us-central1.run.app/run-crawler";
+    private static final String PRODUCTS_CRAWLER_URL = "https://product-crawler-750875526794.us-central1.run.app/run-crawler";
+    private static final String REVIEWS_CRAWLER_URL = "https://review-crawler-750875526794.us-central1.run.app/run-crawler";
 
     @PostMapping("/run")
     public ResponseEntity<String> runCrawler(@RequestParam String target) {

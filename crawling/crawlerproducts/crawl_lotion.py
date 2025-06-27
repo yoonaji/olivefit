@@ -2,6 +2,7 @@ from playwright.sync_api import sync_playwright
 import time
 from bs4 import BeautifulSoup
 import psycopg2  # PostgreSQL 연결용
+import os
 
 # HTML 크롤링
 def crawl_skin_list_html(playwright_page, page):
@@ -29,13 +30,13 @@ def parse_skin_list(html):
 # PostgreSQL에 저장
 def write_data_to_db(data):
     conn = psycopg2.connect(
-        host="35.193.145.208",       # Docker 쓰면 "localhost" 또는 "127.0.0.1"
-        port=5432,
-        dbname="olivefit_db",     # 위에서 생성한 DB 이름
-        user="postgres",        # 기본 사용자
-        password="0000"         # 설정한 비밀번호
+    user=os.environ["DB_USER"],
+    password=os.environ["DB_PASSWORD"],
+    dbname=os.environ["DB_NAME"],
+    host=f'/cloudsql/{os.environ["INSTANCE_CONNECTION_NAME"]}'
     )
     cur = conn.cursor()
+
 
     for row in data:
         cur.execute("""
